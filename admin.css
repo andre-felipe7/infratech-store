@@ -1,0 +1,193 @@
+/* Estilos simples do painel, usando as mesmas cores da loja. */
+.menu-admin {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #dde4d8;
+  border-radius: 8px;
+  background: white;
+}
+
+.menu-admin a {
+  padding: 6px;
+}
+
+.indicadores {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.indicadores > div {
+  flex: 1;
+  min-width: 160px;
+  padding: 22px;
+  border: 1px solid #dde4d8;
+  border-radius: 8px;
+  background: white;
+}
+
+.indicadores strong, .indicadores span {
+  display: block;
+}
+
+.indicadores strong {
+  font-size: 30px;
+  color: #3f622e;
+}
+
+.indicadores span {
+  font-size: 14px;
+}
+
+.admin-formulario {
+  max-width: none;
+  margin: 20px 0;
+}
+
+.admin-formulario h3 {
+  margin-top: 0;
+}
+
+.campos-admin {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.campos-admin > div {
+  flex: 1;
+  min-width: 200px;
+}
+
+.admin-formulario textarea {
+  width: 100%;
+  border: 1px solid #bcc7b6;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding: 12px;
+  margin: 7px 0 18px;
+  resize: vertical;
+}
+
+.admin-formulario .linha-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+}
+
+.admin-formulario .linha-checkbox input {
+  width: auto;
+  margin: 0;
+}
+
+.filtro-admin {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 18px;
+  border: 1px solid #bcc7b6;
+  border-radius: 5px;
+  font: inherit;
+}
+
+.tabela-container {
+  overflow-x: auto;
+  border: 1px solid #dde4d8;
+  border-radius: 8px;
+  background: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+caption {
+  text-align: left;
+  font-weight: bold;
+  padding: 16px;
+}
+
+th, td {
+  padding: 14px;
+  text-align: left;
+  border-top: 1px solid #dde4d8;
+  overflow-wrap: break-word;
+}
+
+th {
+  background: #e4eddc;
+}
+
+td button {
+  padding: 8px 12px;
+  margin: 3px;
+  font-size: 12px;
+}
+
+.situacao {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 4px 8px;
+  background: #e4eddc;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.situacao.inativo {
+  background: #f0e7de;
+  color: #784b2b;
+}
+
+.mensagem-admin {
+  padding: 22px;
+  margin-bottom: 15px;
+  border: 1px solid #dde4d8;
+  border-left: 4px solid #91b768;
+  border-radius: 8px;
+  background: white;
+  overflow-wrap: break-word;
+}
+
+.mensagem-admin.lida {
+  border-left-color: #bcc7b6;
+}
+
+.mensagem-admin h3 {
+  margin: 0 0 6px;
+}
+
+.mensagem-texto {
+  white-space: pre-wrap;
+}
+
+.mensagem-painel {
+  color: #355d28;
+  font-weight: bold;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+  .admin-formulario {
+    padding: 20px;
+  }
+
+  .campos-admin {
+    display: block;
+  }
+
+  .campos-admin > div {
+    min-width: 0;
+  }
+
+  .indicadores > div {
+    min-width: 130px;
+  }
+}

@@ -1,0 +1,491 @@
+/* Configurações gerais da página. */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f2;
+  color: #24352b;
+  line-height: 1.6;
+}
+
+/* Cabeçalho e menu. */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #20392e;
+  color: white;
+  padding: 24px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.marca h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.marca p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #d0dfce;
+}
+
+header input {
+  flex: 1;
+  min-width: 180px;
+  padding: 13px;
+  border: 0;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.acoes, .menu {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.menu {
+  width: 100%;
+  padding-top: 14px;
+  border-top: 1px solid #486052;
+}
+
+.menu a {
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.menu a:hover, .menu a:focus-visible {
+  background: #385543;
+}
+
+button, .botao {
+  display: inline-block;
+  background: #c1e894;
+  color: #20392e;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+button:hover, .botao:hover {
+  background: #acd77a;
+}
+
+.secundario {
+  background: #e8ede4;
+}
+
+.secundario:hover {
+  background: #d7e0d1;
+}
+
+/* Apresentação da loja. */
+main {
+  max-width: 1100px;
+  min-height: 65vh;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.boas-vindas {
+  background: #e4eddc;
+  padding: 38px;
+  border-radius: 10px;
+  margin-bottom: 32px;
+}
+
+.boas-vindas h2 {
+  font-size: 32px;
+  line-height: 1.3;
+  margin: 10px 0;
+}
+
+.boas-vindas p {
+  margin: 0 0 18px;
+}
+
+.boas-vindas .destaque {
+  font-size: 12px;
+  font-weight: bold;
+  color: #456438;
+  margin-bottom: 8px;
+}
+
+.titulo-produtos h2 {
+  margin-bottom: 4px;
+}
+
+.titulo-produtos p {
+  margin-top: 0;
+  color: #5c6859;
+}
+
+/* Seções de categorias, sobre a loja e contato. */
+.secao {
+  margin-bottom: 40px;
+}
+
+.secao h2 {
+  margin-top: 0;
+}
+
+.cartoes-info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cartao-info {
+  width: 31%;
+  background: white;
+  padding: 24px;
+  border: 1px solid #dde4d8;
+  border-radius: 9px;
+  color: #24352b;
+  text-decoration: none;
+}
+
+.cartao-info:hover, .cartao-info:focus-visible {
+  background: #eaf2e2;
+  border-color: #789465;
+}
+
+.link-categoria {
+  display: block;
+  margin-top: 18px;
+  font-weight: bold;
+  color: #355d28;
+}
+
+.icone-categoria {
+  font-size: 36px;
+}
+
+.cartao-info h3 {
+  margin: 10px 0;
+}
+
+.cartao-info p {
+  margin-bottom: 0;
+  color: #5c6859;
+}
+
+.sobre-loja {
+  background: #e4eddc;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.sobre-loja li {
+  margin-bottom: 10px;
+}
+
+.bloco-contato {
+  display: flex;
+  gap: 30px;
+}
+
+.contato-texto {
+  width: 40%;
+}
+
+.contato-formulario {
+  width: 60%;
+  background: white;
+  padding: 25px;
+  border: 1px solid #dde4d8;
+  border-radius: 9px;
+}
+
+.contato-texto h3 {
+  margin-top: 0;
+}
+
+.contato-formulario textarea {
+  resize: vertical;
+}
+
+#retornoContato {
+  color: #355d28;
+}
+
+/* Cartões dos produtos. */
+.grupo-produtos {
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid #dde4d8;
+}
+
+.grupo-produtos > h3 {
+  font-size: 22px;
+  margin: 0 0 18px;
+}
+
+#resultadoBusca {
+  color: #5c6859;
+}
+
+.produtos {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.produto {
+  width: 31%;
+  background: white;
+  border: 1px solid #dde4d8;
+  border-radius: 9px;
+  padding: 20px;
+  text-align: center;
+}
+
+.produto h4 {
+  font-size: 18px;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.descricao-produto {
+  color: #5c6859;
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+.fonte-produto {
+  display: inline-block;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.foto {
+  font-size: 70px;
+  background: #f1f5ec;
+  padding: 20px;
+  border-radius: 7px;
+}
+
+.preco {
+  color: #3f622e;
+  font-weight: bold;
+  font-size: 23px;
+  margin: 10px 0 18px;
+}
+
+.preco-pix {
+  color: #355d28;
+  font-size: 15px;
+  margin: 8px 0 12px;
+}
+
+.condicoes-cartao {
+  color: #5c6859;
+  font-size: 13px;
+  margin: 0 0 18px;
+}
+
+.produto button {
+  width: 100%;
+}
+
+/* Formulários e telas da compra. */
+.escondido {
+  display: none;
+}
+
+.formulario, .resumo {
+  background: white;
+  border: 1px solid #dde4d8;
+  border-radius: 9px;
+  padding: 25px;
+}
+
+.formulario {
+  max-width: 450px;
+  margin: 25px auto;
+}
+
+.formulario h2 {
+  margin-top: 0;
+}
+
+.formulario label, .contato-formulario label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.formulario input, .formulario select,
+.contato-formulario input, .contato-formulario textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 7px 0 18px;
+  border: 1px solid #bcc7b6;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.formulario button, .resumo button {
+  margin: 5px 5px 5px 0;
+}
+
+.aviso {
+  background: #f1f5ec;
+  color: #526347;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0;
+  padding: 20px;
+  background: white;
+  border: 1px solid #dde4d8;
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.item button {
+  margin: 3px;
+  min-width: 42px;
+}
+
+.resumo {
+  margin-top: 20px;
+}
+
+.resumo h3 {
+  margin-top: 0;
+}
+
+.resumo-pagamento {
+  border-top: 1px solid #dde4d8;
+  padding-top: 12px;
+}
+
+.resumo-pagamento p {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.desconto-pix {
+  color: #355d28;
+  font-weight: bold;
+}
+
+#detalhesPedido {
+  white-space: pre-line;
+}
+
+a {
+  color: #355d28;
+}
+
+footer {
+  text-align: center;
+  background: #20392e;
+  color: white;
+  padding: 28px 20px;
+  margin-top: 40px;
+}
+
+footer p {
+  margin: 5px 0;
+  color: #d0dfce;
+  font-size: 13px;
+}
+
+footer a {
+  display: inline-block;
+  color: #c1e894;
+  margin-top: 12px;
+}
+
+/* Ajustes simples para tablet e celular. */
+@media (max-width: 900px) {
+  .produto, .cartao-info {
+    width: 48%;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .marca {
+    text-align: center;
+  }
+
+  .acoes, .menu {
+    justify-content: center;
+  }
+
+  .acoes button, .menu a {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .boas-vindas {
+    padding: 24px;
+  }
+
+  .boas-vindas h2 {
+    font-size: 26px;
+  }
+
+  .produto, .cartao-info {
+    width: 100%;
+  }
+
+  .sobre-loja {
+    padding: 24px;
+  }
+
+  .bloco-contato {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .contato-texto, .contato-formulario {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfraTech Store</title>
+  <link rel="stylesheet" href="style.css?v=admin-integrado-2">
+  <link rel="stylesheet" href="admin.css?v=admin-integrado-2">
+</head>
+<body>
+  <!-- Os links do menu usam href com o id de cada seção. -->
+  <header>
+    <div class="marca">
+      <h1>InfraTech Store</h1>
+      <p>Sua loja de tecnologia</p>
+    </div>
+
+    <input id="pesquisa" type="search" placeholder="Buscar produtos..."
+      aria-label="Buscar produtos" oninput="buscarProdutos()">
+
+    <div class="acoes">
+      <button id="linkAdmin" class="escondido" onclick="abrir('admin')">Admin</button>
+      <button onclick="abrir('login')" id="botaoConta">Entrar / Cadastrar</button>
+      <button onclick="abrir('carrinho')">Carrinho (<span id="quantidade">0</span>)</button>
+    </div>
+
+    <nav class="menu" aria-label="Seções da loja">
+      <a href="#inicio" onclick="limparPesquisa()">Início</a>
+      <a href="#categorias" onclick="limparPesquisa()">Categorias</a>
+      <a href="#catalogo" onclick="abrir('loja')">Produtos</a>
+      <a href="#sobre" onclick="limparPesquisa()">Sobre</a>
+      <a href="#contato" onclick="abrir('loja')">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Loja: apresentação e lista de produtos. -->
+    <section id="loja" class="tela">
+      <section id="inicio" class="boas-vindas">
+        <p class="destaque">BEM-VINDO À INFRATECH</p>
+        <h2>Tecnologia para o seu dia a dia.</h2>
+        <p>Encontre notebooks, celulares e acessórios em um só lugar.</p>
+        <a class="botao" href="#catalogo">Ver produtos</a>
+      </section>
+
+      <!-- Cada seção tem um id para receber os links do cabeçalho. -->
+      <section id="categorias" class="secao">
+        <h2>Conheça nossas categorias</h2>
+        <p>Clique em uma categoria para ir direto aos produtos.</p>
+        <div class="cartoes-info">
+          <a class="cartao-info" href="#grupo-notebooks" onclick="limparPesquisa()">
+            <span class="icone-categoria" aria-hidden="true">💻</span>
+            <h3>Notebooks</h3>
+            <p>Modelos Dell, Lenovo e Acer para conhecer e comparar.</p>
+            <span class="link-categoria">Ver notebooks →</span>
+          </a>
+          <a class="cartao-info" href="#grupo-celulares" onclick="limparPesquisa()">
+            <span class="icone-categoria" aria-hidden="true">📱</span>
+            <h3>Celulares</h3>
+            <p>Conheça os smartphones da linha Samsung Galaxy.</p>
+            <span class="link-categoria">Ver celulares →</span>
+          </a>
+          <a class="cartao-info" href="#grupo-fones" onclick="limparPesquisa()">
+            <span class="icone-categoria" aria-hidden="true">🎧</span>
+            <h3>Fones de ouvido</h3>
+            <p>Fones JBL das linhas Tune e Wave para ouvir suas músicas.</p>
+            <span class="link-categoria">Ver fones →</span>
+          </a>
+          <a class="cartao-info" href="#grupo-teclados" onclick="limparPesquisa()">
+            <span class="icone-categoria" aria-hidden="true">⌨️</span>
+            <h3>Teclados</h3>
+            <p>Opções Logitech com fio e sem fio para sua mesa.</p>
+            <span class="link-categoria">Ver teclados →</span>
+          </a>
+          <a class="cartao-info" href="#grupo-mouses" onclick="limparPesquisa()">
+            <span class="icone-categoria" aria-hidden="true">🖱️</span>
+            <h3>Mouses</h3>
+            <p>Modelos Logitech para tarefas do dia a dia e jogos.</p>
+            <span class="link-categoria">Ver mouses →</span>
+          </a>
+          <a class="cartao-info" href="#grupo-monitores" onclick="limparPesquisa()">
+            <span class="icone-categoria" aria-hidden="true">🖥️</span>
+            <h3>Monitores</h3>
+            <p>Conheça os modelos LG para completar seu computador.</p>
+            <span class="link-categoria">Ver monitores →</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="catalogo" class="secao">
+        <div class="titulo-produtos">
+          <h2>Nossos produtos</h2>
+          <p>Escolha um produto e adicione ao carrinho.</p>
+          <p class="aviso">Catálogo de demonstração, com ícones ilustrativos.
+            Todos os preços são fictícios, usados apenas nesta demonstração.</p>
+        </div>
+        <p id="resultadoBusca" role="status"></p>
+        <div id="produtos">
+          <!-- Estes ids são os destinos dos links dos cartões de categorias. -->
+          <section id="grupo-notebooks" class="grupo-produtos">
+            <h3>Notebooks</h3>
+            <div id="produtos-notebooks" class="produtos"></div>
+          </section>
+          <section id="grupo-celulares" class="grupo-produtos">
+            <h3>Celulares</h3>
+            <div id="produtos-celulares" class="produtos"></div>
+          </section>
+          <section id="grupo-fones" class="grupo-produtos">
+            <h3>Fones de ouvido</h3>
+            <div id="produtos-fones" class="produtos"></div>
+          </section>
+          <section id="grupo-teclados" class="grupo-produtos">
+            <h3>Teclados</h3>
+            <div id="produtos-teclados" class="produtos"></div>
+          </section>
+          <section id="grupo-mouses" class="grupo-produtos">
+            <h3>Mouses</h3>
+            <div id="produtos-mouses" class="produtos"></div>
+          </section>
+          <section id="grupo-monitores" class="grupo-produtos">
+            <h3>Monitores</h3>
+            <div id="produtos-monitores" class="produtos"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="sobre" class="secao sobre-loja">
+        <h2>Sobre a InfraTech Store</h2>
+        <p>A InfraTech Store é uma loja de demonstração criada como projeto educativo.
+          Aqui você pode conhecer os produtos e testar as etapas de uma compra,
+          sem realizar pagamentos reais.</p>
+        <p>O site foi desenvolvido com HTML, CSS e JavaScript básicos para praticar
+          a organização das páginas, os estilos e as interações com o usuário.</p>
+        <h3>Como comprar nesta demonstração</h3>
+        <ol>
+          <li>Escolha os produtos e clique em “Adicionar ao carrinho”.</li>
+          <li>Confira as quantidades no carrinho e entre na sua conta de demonstração.</li>
+          <li>Selecione a forma de pagamento e confirme o pedido de teste.</li>
+        </ol>
+        <p class="aviso">Dica: use o cupom INFRA10 para testar um desconto de 10%.</p>
+      </section>
+
+      <section id="contato" class="secao">
+        <h2>Fale com a gente</h2>
+        <div class="bloco-contato">
+          <div class="contato-texto">
+            <h3>Tem alguma sugestão?</h3>
+            <p>Envie uma dúvida ou sugestão para consultar depois no painel administrativo.</p>
+            <p class="aviso">Nesta demonstração, as mensagens ficam salvas somente neste navegador.
+              Nenhum e-mail é enviado.</p>
+          </div>
+          <form id="formContato" class="contato-formulario" onsubmit="enviarMensagem(); return false;">
+            <label for="nomeContato">Nome</label>
+            <input id="nomeContato" placeholder="Seu nome" autocomplete="name" maxlength="100" required>
+            <label for="emailContato">E-mail</label>
+            <input id="emailContato" type="email" placeholder="seunome@exemplo.com" autocomplete="email" maxlength="150" required>
+            <label for="mensagemContato">Mensagem</label>
+            <textarea id="mensagemContato" rows="5" placeholder="Escreva sua mensagem" maxlength="3000" required></textarea>
+            <button type="submit">Salvar mensagem</button>
+            <p id="retornoContato" role="status"></p>
+          </form>
+        </div>
+      </section>
+    </section>
+
+    <!-- Formulários simples de entrada e cadastro. -->
+    <section id="login" class="tela escondido formulario">
+      <h2>Entrar na conta</h2>
+      <p>Informe seu usuário e sua senha de demonstração.</p>
+      <form onsubmit="entrar(); return false;">
+        <label for="loginUsuario">Usuário</label>
+        <input id="loginUsuario" placeholder="Digite seu usuário" autocomplete="username" required>
+        <label for="loginSenha">Senha</label>
+        <input id="loginSenha" type="password" placeholder="Digite sua senha" autocomplete="current-password" required>
+        <p id="mensagemLogin" role="status"></p>
+        <button type="submit">Entrar</button>
+      </form>
+      <p>Não tem conta? <a href="#" onclick="abrir('cadastro'); return false;">Cadastre-se</a></p>
+      <button class="secundario" onclick="abrir('loja')">Voltar à loja</button>
+    </section>
+
+    <section id="cadastro" class="tela escondido formulario">
+      <h2>Criar conta</h2>
+      <p class="aviso">Cadastro apenas para demonstração, salvo neste navegador. Não use senhas reais.</p>
+      <form onsubmit="cadastrar(); return false;">
+        <label for="novoUsuario">Usuário</label>
+        <input id="novoUsuario" placeholder="Escolha um usuário" autocomplete="username" required>
+        <label for="novaSenha">Senha de demonstração</label>
+        <input id="novaSenha" type="password" placeholder="Pelo menos 4 caracteres" autocomplete="new-password" minlength="4" required>
+        <button type="submit">Cadastrar</button>
+      </form>
+      <p>Já tem conta? <a href="#" onclick="abrir('login'); return false;">Entrar</a></p>
+      <button class="secundario" onclick="abrir('loja')">Voltar à loja</button>
+    </section>
+
+    <!-- Carrinho com os produtos escolhidos e o subtotal. -->
+    <section id="carrinho" class="tela escondido">
+      <h2>Meu carrinho</h2>
+      <p id="avisoCarrinho" role="status"></p>
+      <div id="itensCarrinho"></div>
+      <div class="resumo">
+        <h3 id="subtotal"></h3>
+        <button class="secundario" onclick="abrir('loja')">Continuar comprando</button>
+        <button onclick="irParaPagamento()">Finalizar compra</button>
+      </div>
+    </section>
+
+    <!-- Pagamento de demonstração: nenhum valor será cobrado. -->
+    <section id="pagamento" class="tela escondido formulario">
+      <h2>Finalizar compra</h2>
+      <p id="resumoCompra"></p>
+      <label for="cupom">Cupom de desconto</label>
+      <input id="cupom" placeholder="Exemplo: INFRA10">
+      <button class="secundario" onclick="aplicarCupom()">Aplicar cupom</button>
+      <p id="mensagemCupom" role="status"></p>
+      <form onsubmit="finalizarCompra(); return false;">
+        <label for="formaPagamento">Forma de pagamento</label>
+        <select id="formaPagamento" onchange="mostrarPagamento()" required>
+          <option value="">Selecione</option>
+          <option value="Pix">Pix — 10% de desconto</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Boleto">Boleto</option>
+        </select>
+
+        <div id="opcoesParcelamento" class="escondido">
+          <label for="parcelas">Quantidade de parcelas</label>
+          <select id="parcelas" onchange="mostrarPagamento()" required disabled>
+            <option value="1">1x sem juros</option>
+          </select>
+          <p id="regraJuros" class="aviso"></p>
+        </div>
+
+        <div class="resumo-pagamento" aria-live="polite">
+          <p id="descontoCupomPagamento"></p>
+          <p id="descontoPixPagamento" class="desconto-pix"></p>
+          <p id="jurosPagamento"></p>
+          <p id="detalhesParcelamento"></p>
+          <h3 id="totalPagamento"></h3>
+        </div>
+
+        <p class="aviso">Compra de demonstração. Nenhum pagamento será cobrado.</p>
+        <button type="submit">Confirmar pedido</button>
+      </form>
+      <button class="secundario" onclick="abrir('carrinho')">Voltar ao carrinho</button>
+    </section>
+
+    <section id="sucesso" class="tela escondido formulario">
+      <h2>Pedido realizado!</h2>
+      <p id="detalhesPedido"></p>
+      <p>Esta é uma compra de demonstração. Nenhum pagamento foi cobrado.</p>
+      <button onclick="abrir('loja')">Voltar à loja</button>
+    </section>
+    <section id="admin" class="tela escondido">
+      <h2>Administrar a loja</h2>
+      <nav class="menu-admin" aria-label="Menu do painel">
+        <a href="#resumoAdmin">Resumo</a>
+        <a href="#mensagensAdmin">Mensagens</a>
+        <a href="#usuariosAdmin">Usuários</a>
+        <a href="#produtosAdmin">Produtos</a>
+        <a href="#cuponsAdmin">Cupons</a>
+        <button class="secundario" onclick="abrir('loja')">Voltar à loja</button>
+      </nav>
+      <p class="aviso">Painel demonstrativo. Os dados ficam salvos neste navegador.</p>
+
+    <section id="resumoAdmin" class="secao">
+      <h2>Visão geral</h2>
+      <div class="indicadores">
+        <div><strong id="totalProdutosAdmin">0</strong><span>Produtos ativos</span></div>
+        <div><strong id="totalMensagensAdmin">0</strong><span>Mensagens não lidas</span></div>
+        <div><strong id="totalUsuariosAdmin">0</strong><span>Usuários cadastrados</span></div>
+        <div><strong id="totalCuponsAdmin">0</strong><span>Cupons ativos</span></div>
+      </div>
+    </section>
+
+    <section id="mensagensAdmin" class="secao">
+      <h2>Mensagens de contato</h2>
+      <p>As novas mensagens enviadas pelo formulário da loja aparecem aqui.</p>
+      <div id="listaMensagens"></div>
+    </section>
+
+    <section id="usuariosAdmin" class="secao">
+      <h2>Usuários cadastrados</h2>
+      <p>Consulte os nomes e as datas de cadastro. As senhas não são exibidas.</p>
+      <div class="tabela-container">
+        <table>
+          <caption>Cadastros da loja</caption>
+          <thead><tr><th scope="col">Usuário</th><th scope="col">Data de cadastro</th></tr></thead>
+          <tbody id="listaUsuarios"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="produtosAdmin" class="secao">
+      <h2>Gerenciar produtos</h2>
+      <form id="formProduto" class="formulario admin-formulario" onsubmit="salvarProduto(); return false;">
+        <h3 id="tituloFormProduto">Cadastrar produto</h3>
+        <input id="produtoId" type="hidden">
+        <div class="campos-admin">
+          <div>
+            <label for="nomeProduto">Nome</label>
+            <input id="nomeProduto" maxlength="100" required placeholder="Nome do produto">
+          </div>
+          <div>
+            <label for="categoriaProduto">Categoria</label>
+            <select id="categoriaProduto" required>
+              <option value="notebooks">Notebooks</option>
+              <option value="celulares">Celulares</option>
+              <option value="fones">Fones de ouvido</option>
+              <option value="teclados">Teclados</option>
+              <option value="mouses">Mouses</option>
+              <option value="monitores">Monitores</option>
+            </select>
+          </div>
+          <div>
+            <label for="precoProduto">Preço padrão (R$)</label>
+            <input id="precoProduto" type="number" min="0.01" max="999999.99" step="0.01" required placeholder="199.90">
+          </div>
+          <div>
+            <label for="iconeProduto">Ícone ilustrativo</label>
+            <select id="iconeProduto">
+              <option value="📦">📦 Produto</option>
+              <option value="💻">💻 Notebook</option>
+              <option value="📱">📱 Celular</option>
+              <option value="🎧">🎧 Fone</option>
+              <option value="⌨️">⌨️ Teclado</option>
+              <option value="🖱️">🖱️ Mouse</option>
+              <option value="🖥️">🖥️ Monitor</option>
+            </select>
+          </div>
+        </div>
+        <label for="descricaoProduto">Descrição</label>
+        <textarea id="descricaoProduto" rows="3" maxlength="600" required placeholder="Descreva o produto"></textarea>
+        <label for="fonteProduto">Link do fabricante (opcional)</label>
+        <input id="fonteProduto" type="url" pattern="https?://.*" maxlength="1500" placeholder="https://fabricante.com/produto">
+        <label class="linha-checkbox" for="ativoProduto"><input id="ativoProduto" type="checkbox" checked> Produto ativo na loja</label>
+        <button id="botaoSalvarProduto" type="submit">Cadastrar produto</button>
+        <button id="cancelarProduto" class="secundario escondido" type="button" onclick="limparFormProduto()">Cancelar edição</button>
+        <p id="mensagemProduto" class="mensagem-painel" role="status"></p>
+      </form>
+
+      <label for="filtroProdutosAdmin">Buscar na lista de produtos</label>
+      <input id="filtroProdutosAdmin" class="filtro-admin" type="search" oninput="mostrarProdutosAdmin()" placeholder="Nome ou categoria">
+      <div class="tabela-container">
+        <table>
+          <caption>Produtos cadastrados</caption>
+          <thead><tr><th scope="col">Produto</th><th scope="col">Categoria</th><th scope="col">Preço</th><th scope="col">Situação</th><th scope="col">Ações</th></tr></thead>
+          <tbody id="listaProdutosAdmin"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cuponsAdmin" class="secao">
+      <h2>Gerenciar cupons</h2>
+      <p>Os cupons dão desconto percentual sobre o subtotal. O Pix aplica seus 10% depois do cupom.</p>
+      <form id="formCupom" class="formulario admin-formulario" onsubmit="salvarCupom(); return false;">
+        <h3 id="tituloFormCupom">Criar cupom</h3>
+        <input id="cupomId" type="hidden">
+        <div class="campos-admin">
+          <div>
+            <label for="codigoCupom">Código</label>
+            <input id="codigoCupom" minlength="3" maxlength="30" pattern="[A-Za-z0-9_-]{3,30}" required placeholder="EXEMPLO15">
+          </div>
+          <div>
+            <label for="percentualCupom">Desconto (%)</label>
+            <input id="percentualCupom" type="number" min="0.01" max="100" step="0.01" required placeholder="15">
+          </div>
+        </div>
+        <label class="linha-checkbox" for="ativoCupom"><input id="ativoCupom" type="checkbox" checked> Cupom ativo</label>
+        <button id="botaoSalvarCupom" type="submit">Criar cupom</button>
+        <button id="cancelarCupom" class="secundario escondido" type="button" onclick="limparFormCupom()">Cancelar edição</button>
+        <p id="mensagemCupomAdmin" class="mensagem-painel" role="status"></p>
+      </form>
+      <div class="tabela-container">
+        <table>
+          <caption>Cupons cadastrados</caption>
+          <thead><tr><th scope="col">Código</th><th scope="col">Desconto</th><th scope="col">Situação</th><th scope="col">Ações</th></tr></thead>
+          <tbody id="listaCuponsAdmin"></tbody>
+        </table>
+      </div>
+    </section>
+    </section>
+  </main>
+
+  <footer>
+    <strong>InfraTech Store</strong>
+    <p>Projeto educativo em HTML, CSS e JavaScript.</p>
+    <p>Loja de demonstração — sem vendas reais.</p>
+    <a href="#inicio" onclick="limparPesquisa()">Voltar ao início ↑</a>
+  </footer>
+  <script src="dados.js?v=admin-integrado-2"></script>
+  <script src="script.js?v=admin-integrado-2"></script>
+</body>
+</html>

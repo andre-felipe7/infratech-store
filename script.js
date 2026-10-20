@@ -161,7 +161,7 @@ function mostrarProdutos() {
           '</p><p class="preco">' + dinheiro(p.preco) +
           '</p><p class="preco-pix">No Pix: <strong>' + dinheiro(arredondar(p.preco - calcularPorcentagem(p.preco, 10))) +
           '</strong></p>' +
-          '<p class="condicoes-cartao">Cartão: até 3x sem juros.</p>' +
+          '<p class="condicoes-cartao">Em até 3x sem juros no cartão</p>' +
           linkFonte +
           '<button onclick="adicionar(' + p.id + ')">Adicionar ao carrinho</button></article>';
         encontrados++;

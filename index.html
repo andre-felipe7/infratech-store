@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfraTech Store</title>
-  <link rel="stylesheet" href="style.css?v=enderecos-entrega-1">
-  <link rel="stylesheet" href="admin.css?v=enderecos-entrega-1">
+  <link rel="stylesheet" href="style.css?v=aceite-privacidade-1">
+  <link rel="stylesheet" href="admin.css?v=aceite-privacidade-1">
 </head>
 <body>
   <!-- Os links do menu usam href com o id de cada seção. -->
@@ -206,6 +206,22 @@
           <label for="cadastroEnderecoUf">Estado (UF)</label>
           <input id="cadastroEnderecoUf" placeholder="SP" maxlength="2" required pattern="[A-Za-z]{2}">
         </fieldset>
+        <details id="termosPrivacidade">
+          <summary>Leia os Termos de Uso e o Aviso de Privacidade</summary>
+          <h3>Termos de Uso</h3>
+          <p>A InfraTech Store é um projeto educativo. Cadastros, pedidos, pagamentos e entregas são simulações: não há venda, cobrança ou envio de produtos. Use apenas dados fictícios e uma senha de demonstração.</p>
+          <h3>Aviso de Privacidade</h3>
+          <p>O cadastro guarda usuário, e-mail, senha de demonstração, endereços e o registro deste aceite para permitir acesso à conta, escolha de entrega e simulação de compras. Mensagens enviadas pelo formulário de contato também são guardadas.</p>
+          <p>Esses dados ficam no armazenamento local deste navegador, até serem excluídos. Não são enviados a um servidor pela aplicação. Quem tiver acesso ao navegador pode acessar esses dados; o painel demonstrativo exibe usuários, e-mails e mensagens. Não use dados pessoais ou senhas reais.</p>
+          <p>Os dados do cartão são usados apenas para validar o formato na simulação e não são armazenados. O GitHub Pages hospeda o site e pode tratar dados técnicos de acesso conforme sua própria política de privacidade.</p>
+          <p>Para consultar os endereços, entre na conta e abra a finalização da compra. Para excluir o cadastro local e retirar a autorização, remova os dados deste site nas configurações de privacidade do navegador. Isso também apaga contas, endereços e demais dados da demonstração nesse navegador.</p>
+          <p>Não usamos este aceite como autorização para marketing. Versão dos termos e do aviso: 28/10/2026.</p>
+        </details>
+        <label class="linha-checkbox" for="aceiteTermos">
+          <input id="aceiteTermos" type="checkbox" required aria-describedby="descricaoAceite">
+          Li e aceito os Termos de Uso e autorizo o uso dos dados para o cadastro e as compras de demonstração, conforme o Aviso de Privacidade.
+        </label>
+        <p id="descricaoAceite" class="aviso">O aceite é necessário para criar a conta nesta demonstração. Leia os detalhes acima antes de marcar.</p>
         <button type="submit">Cadastrar</button>
       </form>
       <p>Já tem conta? <a href="#" onclick="abrir('login'); return false;">Entrar</a></p>
@@ -449,7 +465,7 @@
     <p>Loja de demonstração — sem vendas reais.</p>
     <a href="#inicio" onclick="limparPesquisa()">Voltar ao início ↑</a>
   </footer>
-  <script src="dados.js?v=enderecos-entrega-1"></script>
-  <script src="script.js?v=enderecos-entrega-1"></script>
+  <script src="dados.js?v=aceite-privacidade-1"></script>
+  <script src="script.js?v=aceite-privacidade-1"></script>
 </body>
 </html>

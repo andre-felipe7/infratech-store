@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfraTech Store</title>
-  <link rel="stylesheet" href="style.css?v=aceite-privacidade-1">
-  <link rel="stylesheet" href="admin.css?v=aceite-privacidade-1">
+  <link rel="stylesheet" href="style.css?v=checkout-login-endereco-1">
+  <link rel="stylesheet" href="admin.css?v=checkout-login-endereco-1">
 </head>
 <body>
   <!-- Os links do menu usam href com o id de cada seção. -->
@@ -166,7 +166,7 @@
     <!-- Formulários simples de entrada e cadastro. -->
     <section id="login" class="tela escondido formulario">
       <h2>Entrar na conta</h2>
-      <p>Informe seu e-mail e sua senha de demonstração. Contas antigas também podem usar o nome de usuário.</p>
+      <p>Informe seu usuário ou e-mail e sua senha de demonstração.</p>
       <form onsubmit="entrar(); return false;">
         <label for="loginUsuario">E-mail ou usuário</label>
         <input id="loginUsuario" placeholder="Digite seu e-mail ou usuário" autocomplete="username" required>
@@ -244,6 +244,7 @@
     <section id="pagamento" class="tela escondido formulario">
       <h2>Finalizar compra</h2>
       <p id="resumoCompra"></p>
+      <p class="aviso">Para concluir o pedido, entre na sua conta e selecione um endereço de entrega.</p>
       <label for="cupom">Cupom de desconto</label>
       <input id="cupom" placeholder="Exemplo: INFRA10">
       <button class="secundario" onclick="aplicarCupom()">Aplicar cupom</button>
@@ -465,7 +466,7 @@
     <p>Loja de demonstração — sem vendas reais.</p>
     <a href="#inicio" onclick="limparPesquisa()">Voltar ao início ↑</a>
   </footer>
-  <script src="dados.js?v=aceite-privacidade-1"></script>
-  <script src="script.js?v=aceite-privacidade-1"></script>
+  <script src="dados.js?v=checkout-login-endereco-1"></script>
+  <script src="script.js?v=checkout-login-endereco-1"></script>
 </body>
 </html>

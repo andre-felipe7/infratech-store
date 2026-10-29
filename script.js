@@ -91,6 +91,10 @@ function abrir(nome) {
   if (nome === "admin") atualizarPainel();
 }
 
+function normalizarBusca(texto) {
+  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
 // A busca mostra a loja e filtra os produtos pelo nome.
 function buscarProdutos() {
   abrir('loja');
@@ -125,7 +129,7 @@ function enviarMensagem() {
 
 function mostrarProdutos() {
   carregarCatalogo();
-  var busca = document.getElementById("pesquisa").value.trim().toLowerCase();
+  var busca = normalizarBusca(document.getElementById("pesquisa").value.trim());
 
   // Durante a busca, oculta a apresentação, as categorias e o texto sobre a loja.
   if (busca !== "") {
@@ -149,7 +153,7 @@ function mostrarProdutos() {
 
     for (var j = 0; j < produtos.length; j++) {
       var p = produtos[j];
-      var textoProduto = (p.nome + " " + p.categoria + " " + p.descricao).toLowerCase();
+      var textoProduto = normalizarBusca(p.nome + " " + nomeCategoria(p.categoria) + " " + p.descricao);
 
       if (p.ativo !== false && p.categoria === categoria && textoProduto.includes(busca)) {
         var linkFonte = "";

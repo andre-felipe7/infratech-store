@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InfraTech Store</title>
-  <link rel="stylesheet" href="style.css?v=endereco-senha-forte-1">
+  <title>InfraTech Store | Tecnologia para o seu dia a dia</title>
+  <link rel="stylesheet" href="style.css?v=home-2">
   <link rel="stylesheet" href="admin.css?v=endereco-senha-forte-1">
 </head>
-<body>
+<body><a class="pular-conteudo" href="#catalogo" onclick="limparPesquisa()">Pular para os produtos</a>
   <!-- Os links do menu usam href com o id de cada seção. -->
   <header>
     <div class="marca">
@@ -37,15 +37,23 @@
     <!-- Loja: apresentação e lista de produtos. -->
     <section id="loja" class="tela">
       <section id="inicio" class="boas-vindas">
-        <p class="destaque">BEM-VINDO À INFRATECH</p>
-        <h2>Tecnologia para o seu dia a dia.</h2>
-        <p>Encontre notebooks, celulares e acessórios em um só lugar.</p>
-        <a class="botao" href="#catalogo">Ver produtos</a>
+        <div class="hero-texto">
+          <p class="destaque">CONECTE-SE AO QUE IMPORTA</p>
+          <h2>Seu próximo upgrade começa <em>aqui.</em></h2>
+          <p class="hero-descricao">Para trabalhar, criar ou dar play. Encontre a tecnologia que acompanha o seu ritmo.</p>
+          <div class="hero-acoes"><a class="botao" href="#catalogo">Explorar produtos ↗</a><a class="hero-link" href="#categorias">Ver categorias →</a></div>
+          <p class="hero-nota">Loja demonstrativa · Sem compras ou cobranças reais</p>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <span class="visual-etiqueta">SEU MUNDO. MAIS CONECTADO.</span>
+          <div class="notebook-ilustracao"><div class="notebook-tela"><span>infra<span class="tech">tech.</span></span><small>Novas possibilidades, todos os dias.</small></div><div class="notebook-base"></div></div>
+          <div class="visual-legenda"><span>TRABALHE. CRIE. EXPLORE.</span><span>↗</span></div>
+        </div>
       </section>
 
       <!-- Cada seção tem um id para receber os links do cabeçalho. -->
       <section id="categorias" class="secao">
-        <h2>Conheça nossas categorias</h2>
+        <p class="secao-rotulo">ENCONTRE O SEU ESSENCIAL</p><h2>Qual é o seu próximo upgrade?</h2>
         <p>Clique em uma categoria para ir direto aos produtos.</p>
         <div class="cartoes-info">
           <a class="cartao-info" href="#grupo-notebooks" onclick="limparPesquisa()">
@@ -89,7 +97,7 @@
 
       <section id="catalogo" class="secao">
         <div class="titulo-produtos">
-          <h2>Nossos produtos</h2>
+          <p class="secao-rotulo">EXPLORE O CATÁLOGO</p><h2>Tecnologia para cada momento.</h2>
           <p>Escolha um produto e adicione ao carrinho.</p>
           <p class="aviso">Catálogo de demonstração, com ícones ilustrativos.
             Todos os preços são fictícios, usados apenas nesta demonstração.</p>
@@ -179,54 +187,80 @@
       <button class="secundario" onclick="abrir('loja')">Voltar à loja</button>
     </section>
 
-    <section id="cadastro" class="tela escondido formulario">
+    <section id="cadastro" class="tela escondido formulario cadastro">
       <h2>Criar conta</h2>
+      <p class="cadastro-introducao">Preencha seus dados de acesso e o endereço de entrega para começar.</p>
       <p class="aviso">Cadastro apenas para demonstração, salvo neste navegador. Não use senhas reais.</p>
       <form onsubmit="cadastrar(); return false;">
-        <label for="novoUsuario">Usuário</label>
-        <input id="novoUsuario" placeholder="Escolha um usuário" autocomplete="username" required>
-        <label for="novoEmail">E-mail</label>
-        <input id="novoEmail" type="email" placeholder="seunome@exemplo.com" autocomplete="email" maxlength="150" required>
-        <label for="novaSenha">Senha de demonstração</label>
-        <input id="novaSenha" type="password" placeholder="Crie uma senha com pelo menos 8 caracteres" autocomplete="new-password" minlength="8" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9\s])\S{8,}" title="Use pelo menos 8 caracteres, incluindo maiúscula, minúscula, número e símbolo, sem espaços." aria-describedby="regrasSenha" required>
-        <p id="regrasSenha" class="aviso">A senha deve ter pelo menos 8 caracteres, com letra maiúscula, letra minúscula, número e símbolo (como !, @ ou #). Não use sua senha real nesta demonstração.</p>
-<fieldset>
-          <legend>Endereço de entrega</legend>
-          <label for="cadastroEnderecoCep">CEP</label>
-          <input id="cadastroEnderecoCep" placeholder="00000-000" maxlength="9" required inputmode="numeric" pattern="[0-9]{5}-?[0-9]{3}">
-          <label for="cadastroEnderecoRua">Rua / avenida</label>
-          <input id="cadastroEnderecoRua" placeholder="Nome da rua" maxlength="150" required>
-          <label for="cadastroEnderecoNumero">Número</label>
-          <input id="cadastroEnderecoNumero" placeholder="Número ou s/n" maxlength="20" required>
-          <label for="cadastroEnderecoComplemento">Complemento (opcional)</label>
-          <input id="cadastroEnderecoComplemento" placeholder="Apartamento, bloco…" maxlength="100" >
-          <label for="cadastroEnderecoBairro">Bairro</label>
-          <input id="cadastroEnderecoBairro" placeholder="Bairro" maxlength="100" required>
-          <label for="cadastroEnderecoCidade">Cidade</label>
-          <input id="cadastroEnderecoCidade" placeholder="Cidade" maxlength="100" required>
-          <label for="cadastroEnderecoUf">Estado (UF)</label>
-          <input id="cadastroEnderecoUf" placeholder="SP" maxlength="2" required pattern="[A-Za-z]{2}">
-        </fieldset>
-        <details id="termosPrivacidade">
-          <summary>Leia os Termos de Uso e o Aviso de Privacidade</summary>
-          <h3>Termos de Uso</h3>
-          <p>A InfraTech Store é um projeto educativo. Cadastros, pedidos, pagamentos e entregas são simulações: não há venda, cobrança ou envio de produtos. Use apenas dados fictícios e uma senha de demonstração.</p>
-          <h3>Aviso de Privacidade</h3>
-          <p>O cadastro guarda usuário, e-mail, senha de demonstração, endereços e o registro deste aceite para permitir acesso à conta, escolha de entrega e simulação de compras. Mensagens enviadas pelo formulário de contato também são guardadas.</p>
-          <p>Esses dados ficam no armazenamento local deste navegador, até serem excluídos. Não são enviados a um servidor pela aplicação. Quem tiver acesso ao navegador pode acessar esses dados; o painel demonstrativo exibe usuários, e-mails e mensagens. Não use dados pessoais ou senhas reais.</p>
-          <p>Os dados do cartão são usados apenas para validar o formato na simulação e não são armazenados. O GitHub Pages hospeda o site e pode tratar dados técnicos de acesso conforme sua própria política de privacidade.</p>
-          <p>Para consultar os endereços, entre na conta e abra a finalização da compra. Para excluir o cadastro local e retirar a autorização, remova os dados deste site nas configurações de privacidade do navegador. Isso também apaga contas, endereços e demais dados da demonstração nesse navegador.</p>
-          <p>Não usamos este aceite como autorização para marketing. Versão dos termos e do aviso: 28/10/2026.</p>
-        </details>
-        <label class="linha-checkbox" for="aceiteTermos">
-          <input id="aceiteTermos" type="checkbox" required aria-describedby="descricaoAceite">
-          Li e aceito os Termos de Uso e autorizo o uso dos dados para o cadastro e as compras de demonstração, conforme o Aviso de Privacidade.
-        </label>
-        <p id="descricaoAceite" class="aviso">O aceite é necessário para criar a conta nesta demonstração. Leia os detalhes acima antes de marcar.</p>
-        <button type="submit">Cadastrar</button>
+        <div class="cadastro-colunas">
+          <fieldset class="cadastro-grupo">
+            <legend>Dados da conta</legend>
+            <label for="novoUsuario">Usuário</label>
+            <input id="novoUsuario" placeholder="Escolha um usuário" autocomplete="username" required>
+            <label for="novoEmail">E-mail</label>
+            <input id="novoEmail" type="email" placeholder="seunome@exemplo.com" autocomplete="email" maxlength="150" required>
+            <label for="novaSenha">Senha de demonstração</label>
+            <input id="novaSenha" type="password" placeholder="Crie uma senha com pelo menos 8 caracteres" autocomplete="new-password" minlength="8" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9\s])\S{8,}" title="Use pelo menos 8 caracteres, incluindo maiúscula, minúscula, número e símbolo, sem espaços." aria-describedby="regrasSenha" required>
+            <p id="regrasSenha" class="aviso">A senha deve ter pelo menos 8 caracteres, com letra maiúscula, letra minúscula, número e símbolo (como !, @ ou #). Não use sua senha real nesta demonstração.</p>
+          </fieldset>
+          <fieldset class="cadastro-grupo">
+            <legend>Endereço de entrega</legend>
+            <div class="cadastro-campos">
+              <div>
+                <label for="cadastroEnderecoCep">CEP</label>
+                <input id="cadastroEnderecoCep" placeholder="00000-000" autocomplete="postal-code" maxlength="9" required inputmode="numeric" pattern="[0-9]{5}-?[0-9]{3}">
+              </div>
+              <div>
+                <label for="cadastroEnderecoRua">Rua / avenida</label>
+                <input id="cadastroEnderecoRua" placeholder="Nome da rua" autocomplete="address-line1" maxlength="150" required>
+              </div>
+              <div>
+                <label for="cadastroEnderecoNumero">Número</label>
+                <input id="cadastroEnderecoNumero" placeholder="Número ou s/n" maxlength="20" required>
+              </div>
+              <div>
+                <label for="cadastroEnderecoComplemento">Complemento (opcional)</label>
+                <input id="cadastroEnderecoComplemento" placeholder="Apartamento, bloco…" autocomplete="address-line2" maxlength="100">
+              </div>
+              <div class="cadastro-campo-inteiro">
+                <label for="cadastroEnderecoBairro">Bairro</label>
+                <input id="cadastroEnderecoBairro" placeholder="Bairro" maxlength="100" required>
+              </div>
+              <div>
+                <label for="cadastroEnderecoCidade">Cidade</label>
+                <input id="cadastroEnderecoCidade" placeholder="Cidade" autocomplete="address-level2" maxlength="100" required>
+              </div>
+              <div>
+                <label for="cadastroEnderecoUf">Estado (UF)</label>
+                <input id="cadastroEnderecoUf" placeholder="SP" autocomplete="address-level1" maxlength="2" required pattern="[A-Za-z]{2}">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="cadastro-termos">
+          <details id="termosPrivacidade">
+            <summary>Leia os Termos de Uso e o Aviso de Privacidade</summary>
+            <h3>Termos de Uso</h3>
+            <p>A InfraTech Store é um projeto educativo. Cadastros, pedidos, pagamentos e entregas são simulações: não há venda, cobrança ou envio de produtos. Use apenas dados fictícios e uma senha de demonstração.</p>
+            <h3>Aviso de Privacidade</h3>
+            <p>O cadastro guarda usuário, e-mail, senha de demonstração, endereços e o registro deste aceite para permitir acesso à conta, escolha de entrega e simulação de compras. Mensagens enviadas pelo formulário de contato também são guardadas.</p>
+            <p>Esses dados ficam no armazenamento local deste navegador, até serem excluídos. Não são enviados a um servidor pela aplicação. Quem tiver acesso ao navegador pode acessar esses dados; o painel demonstrativo exibe usuários, e-mails e mensagens. Não use dados pessoais ou senhas reais.</p>
+            <p>Os dados do cartão são usados apenas para validar o formato na simulação e não são armazenados. O GitHub Pages hospeda o site e pode tratar dados técnicos de acesso conforme sua própria política de privacidade.</p>
+            <p>Para consultar os endereços, entre na conta e abra a finalização da compra. Para excluir o cadastro local e retirar a autorização, remova os dados deste site nas configurações de privacidade do navegador. Isso também apaga contas, endereços e demais dados da demonstração nesse navegador.</p>
+            <p>Não usamos este aceite como autorização para marketing. Versão dos termos e do aviso: 28/10/2026.</p>
+          </details>
+          <label class="linha-checkbox" for="aceiteTermos">
+            <input id="aceiteTermos" type="checkbox" required aria-describedby="descricaoAceite">
+            <span>Li e aceito os Termos de Uso e autorizo o uso dos dados para o cadastro e as compras de demonstração, conforme o Aviso de Privacidade.</span>
+          </label>
+          <p id="descricaoAceite" class="aviso">O aceite é necessário para criar a conta nesta demonstração. Leia os detalhes acima antes de marcar.</p>
+        </div>
+        <div class="cadastro-acoes">
+          <button type="submit">Cadastrar</button>
+          <button type="button" class="secundario" onclick="abrir('loja')">Voltar à loja</button>
+        </div>
       </form>
-      <p>Já tem conta? <a href="#" onclick="abrir('login'); return false;">Entrar</a></p>
-      <button class="secundario" onclick="abrir('loja')">Voltar à loja</button>
+      <p class="cadastro-login">Já tem conta? <a href="#" onclick="abrir('login'); return false;">Entrar</a></p>
     </section>
 
     <!-- Carrinho com os produtos escolhidos e o subtotal. -->

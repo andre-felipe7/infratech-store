@@ -354,6 +354,117 @@ main {
   margin: 5px 5px 5px 0;
 }
 
+/* O cadastro tem mais campos e aproveita a largura disponível. */
+.cadastro {
+  width: 100%;
+  max-width: 1000px;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(32, 57, 46, 0.06);
+}
+
+.cadastro h2 {
+  margin-bottom: 6px;
+  font-size: 28px;
+}
+
+.cadastro-introducao {
+  margin: 0 0 20px;
+  color: #5c6859;
+}
+
+.cadastro-colunas {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.25fr);
+  gap: 24px;
+  margin: 28px 0;
+}
+
+.cadastro-grupo {
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #dde4d8;
+  border-radius: 8px;
+}
+
+.cadastro-grupo legend {
+  padding: 0 8px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cadastro-campos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 16px;
+}
+
+.cadastro-campo-inteiro {
+  grid-column: 1 / -1;
+}
+
+.cadastro input:focus-visible,
+.cadastro summary:focus-visible,
+.cadastro button:focus-visible,
+.cadastro a:focus-visible {
+  outline: 2px solid #355d28;
+  outline-offset: 3px;
+}
+
+.cadastro-termos {
+  padding: 20px;
+  background: #f7f9f5;
+  border: 1px solid #dde4d8;
+  border-radius: 8px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.cadastro-termos summary {
+  color: #355d28;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cadastro .linha-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 18px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.cadastro .linha-checkbox input {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin: 3px 0 0;
+  padding: 0;
+  accent-color: #355d28;
+}
+
+.cadastro #descricaoAceite {
+  margin: 12px 0 0;
+}
+
+.cadastro-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cadastro-acoes button {
+  min-width: 160px;
+  margin: 0;
+}
+
+.cadastro-login {
+  margin: 20px 0 0;
+}
+
 .aviso {
   background: #f1f5ec;
   color: #526347;
@@ -433,12 +544,33 @@ footer a {
 
 /* Ajustes simples para tablet e celular. */
 @media (max-width: 900px) {
+  .cadastro-colunas {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .produto, .cartao-info {
     width: 48%;
   }
 }
 
 @media (max-width: 600px) {
+  .cadastro {
+    padding: 20px;
+  }
+
+  .cadastro-grupo, .cadastro-termos {
+    padding: 16px;
+  }
+
+  .cadastro-campos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cadastro-acoes button {
+    width: 100%;
+    min-width: 0;
+  }
+
   header {
     flex-direction: column;
     align-items: stretch;
@@ -489,3 +621,80 @@ footer a {
     scroll-behavior: auto;
   }
 }
+
+/* Página inicial: identidade, hierarquia e adaptação para telas pequenas. */
+body { background: #f7f8f5; }
+header { padding: 16px max(5%, calc((100% - 1240px)/2)); gap: 18px; background: #153b30; }
+.marca h1 { font-size: 23px; letter-spacing: -.8px; }
+header input { border-radius: 10px; background: #f6f8f4; min-height: 46px; }
+.menu { padding-top: 8px; gap: 18px; }
+.menu a { padding: 5px 10px; font-size: 14px; }
+main { max-width: 1280px; margin-top: 24px; }
+button, .botao { border-radius: 9px; min-height: 44px; }
+:focus-visible { outline: 3px solid #598c29; outline-offset: 4px; }
+.pular-conteudo { position: fixed; top: -100px; left: 20px; z-index: 2000; padding: 12px 20px; background: white; color: #153b30; }
+.pular-conteudo:focus { top: 12px; }
+.boas-vindas { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 30px; padding: 52px; border-radius: 22px; background: #e8efdf; overflow: hidden; margin-bottom: 52px; }
+.boas-vindas .destaque, .secao-rotulo { font-size: 11px; letter-spacing: 2px; font-weight: 700; color: #3d624a; }
+.boas-vindas h2 { font-size: clamp(36px, 4.2vw, 58px); line-height: 1.07; letter-spacing: -2.4px; margin: 20px 0; max-width: 560px; }
+.boas-vindas h2 em { font-style: normal; color: #4f742c; }
+.hero-descricao { max-width: 400px; color: #506252; font-size: 16px; }
+.hero-acoes { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin: 26px 0; }
+.hero-acoes .botao { background: #173d30; color: white; padding: 14px 22px; }
+.hero-acoes .botao:hover { background: #2b563e; }
+.hero-link { color: #234833; font-size: 14px; font-weight: 700; text-underline-offset: 5px; }
+.boas-vindas .hero-nota { font-size: 11px; color: #53634d; margin: 22px 0 0; }
+.hero-visual { min-height: 320px; border-radius: 18px; padding: 26px; background: radial-gradient(ellipse at 50% 40%, #608569, #153b30 75%); color: #d9edc6; display: flex; flex-direction: column; justify-content: space-between; }
+.visual-etiqueta, .visual-legenda { font-size: 9px; letter-spacing: 2px; }
+.visual-legenda { display: flex; justify-content: space-between; align-items: center; }
+.visual-legenda > :last-child { font-size: 28px; }
+.notebook-ilustracao { padding: 32px 0 20px; transform: rotate(-6deg); }
+.notebook-tela { width: 88%; margin: auto; aspect-ratio: 1.65; background: linear-gradient(125deg, #172b27, #2e5141); border: 7px solid #aebbb3; border-radius: 10px 10px 2px 2px; box-shadow: 0 20px 35px #0b211c66; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.notebook-tela > span { font-size: clamp(24px, 3vw, 42px); font-weight: 700; letter-spacing: -2px; color: white; }
+.tech { color: #c1e894; }
+.notebook-tela small { font-size: 8px; color: #d3e4d6; }
+.notebook-base { height: 10px; border-radius: 2px 2px 50% 50%; background: linear-gradient(#d5ddd6, #7d9386); }
+.secao { margin-bottom: 56px; }
+.secao h2 { font-size: 28px; letter-spacing: -.8px; margin-bottom: 8px; }
+.cartoes-info { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+.cartao-info { width: auto; padding: 22px 12px; text-align: center; border-radius: 14px; transition: transform .18s, border-color .18s; }
+.cartao-info:hover { transform: translateY(-4px); }
+.cartao-info h3 { font-size: 14px; }
+.cartao-info p { display: none; }
+.link-categoria { font-size: 11px; margin-top: 8px; }
+.icone-categoria { display: block; font-size: 32px; }
+.produtos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.produto { width: auto; border-radius: 15px; text-align: left; padding: 24px; display: flex; flex-direction: column; }
+.produto .foto { background: #f2f5ee; border-radius: 12px; text-align: center; padding: 20px; }
+.produto button { margin-top: auto; width: 100%; }
+.produto .preco { letter-spacing: -1px; }
+.sobre-loja { border-radius: 18px; }
+@media (max-width: 950px) {
+  .boas-vindas { padding: 32px; gap: 20px; }
+  .cartoes-info { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+  header { padding: 12px 16px; gap: 10px; }
+  .marca { width: 100%; }
+  .marca p { display: none; }
+  header input { width: 100%; flex-basis: 100%; order: 2; }
+  .acoes { width: 100%; }
+  .acoes button { flex: 1; font-size: 12px; padding: 10px; }
+  .menu { order: 3; gap: 2px; justify-content: space-between; }
+  .menu a { font-size: 12px; padding: 6px; }
+  main { padding: 0 16px; margin-top: 16px; }
+  .boas-vindas { grid-template-columns: 1fr; padding: 26px; gap: 30px; }
+  .boas-vindas h2 { font-size: 40px; }
+  .hero-visual { min-height: 260px; }
+  .hero-acoes { gap: 16px; }
+  .cartoes-info { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .produtos { grid-template-columns: 1fr; }
+  .secao h2 { font-size: 25px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cartao-info { transition: none; }
+}
+
+/* Mantém as seções filtradas ocultas após as regras de layout. */
+.escondido { display: none; }

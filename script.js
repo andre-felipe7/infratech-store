@@ -430,6 +430,7 @@ function irParaPagamento() {
   desconto = 0;
   codigoCupomAplicado = "";
   document.getElementById("cupom").value = "";
+  limparDadosCartao();
   document.getElementById("formaPagamento").value = "";
   document.getElementById("parcelas").value = "1";
   document.getElementById("mensagemCupom").textContent = "";
@@ -464,6 +465,54 @@ function calcularPagamento() {
   };
 }
 
+// Confere a estrutura do número pelo algoritmo de Luhn; não autoriza pagamentos.
+function numeroCartaoValido(valor) {
+  if (!/^[0-9 -]+$/.test(valor)) return false;
+  var numero = valor.replace(/[ -]/g, "");
+  if (!/^\d{13,19}$/.test(numero) || /^(\d)\1+$/.test(numero)) return false;
+  var soma = 0, dobrar = false;
+  for (var i = numero.length - 1; i >= 0; i--) {
+    var digito = Number(numero[i]);
+    if (dobrar) { digito *= 2; if (digito > 9) digito -= 9; }
+    soma += digito;
+    dobrar = !dobrar;
+  }
+  return soma % 10 === 0;
+}
+
+function validadeCartaoValida(valor, agora) {
+  var partes = /^(0[1-9]|1[0-2])\/(\d{4})$/.exec(valor);
+  if (!partes) return false;
+  agora = agora || new Date();
+  var mes = Number(partes[1]), ano = Number(partes[2]);
+  return ano > agora.getFullYear() ||
+    (ano === agora.getFullYear() && mes >= agora.getMonth() + 1);
+}
+
+function limparDadosCartao() {
+  ["nomeCartao", "numeroCartao", "validadeCartao", "cvvCartao"].forEach(function (id) {
+    document.getElementById(id).value = "";
+  });
+  document.getElementById("erroCartao").textContent = "";
+}
+
+function validarDadosCartao() {
+  var erro = "", campo = "";
+  var numero = document.getElementById("numeroCartao").value.trim();
+  if (document.getElementById("nomeCartao").value.trim().length < 2) {
+    erro = "Informe o nome do titular."; campo = "nomeCartao";
+  } else if (!numeroCartaoValido(numero)) {
+    erro = "Informe um número de cartão com formato válido."; campo = "numeroCartao";
+  } else if (!validadeCartaoValida(document.getElementById("validadeCartao").value.trim())) {
+    erro = "Informe uma validade atual ou futura no formato MM/AAAA."; campo = "validadeCartao";
+  } else if (!( /^3[47]/.test(numero.replace(/[ -]/g, "")) ? /^\d{4}$/ : /^\d{3}$/ ).test(document.getElementById("cvvCartao").value)) {
+    erro = "Informe um CVV de 3 dígitos (4 para American Express)."; campo = "cvvCartao";
+  }
+  document.getElementById("erroCartao").textContent = erro;
+  if (campo) document.getElementById(campo).focus();
+  return !erro;
+}
+
 function mostrarPagamento() {
   carregarCatalogo();
   atualizarCupomAplicado();
@@ -474,6 +523,10 @@ function mostrarPagamento() {
   var forma = document.getElementById("formaPagamento").value;
   var seletor = document.getElementById("parcelas");
   var selecionada = Number(seletor.value) || 1;
+  var cartao = forma === "Cartão de crédito";
+  document.getElementById("dadosCartao").disabled = !cartao;
+  document.getElementById("dadosCartao").classList.toggle("escondido", !cartao);
+  if (!cartao) limparDadosCartao();
   var dados = calcularPagamento();
 
   if (forma === "Cartão de crédito") {
@@ -583,6 +636,7 @@ function finalizarCompra() {
   }
 
   if (forma === "Cartão de crédito") {
+    if (!validarDadosCartao()) return;
     var parcelas = Number(document.getElementById("parcelas").value);
     if (parcelas < 1 || parcelas > maximoParcelas || parcelas !== Math.floor(parcelas)) {
       alert("Escolha uma quantidade de parcelas entre 1 e " + maximoParcelas + ".");
@@ -619,7 +673,10 @@ function finalizarCompra() {
   desconto = 0;
   codigoCupomAplicado = "";
   salvarCarrinho();
+  limparDadosCartao();
   abrir("sucesso");
+  document.getElementById("tituloAgradecimento").focus();
+  window.scrollTo(0, 0);
 }
 
 // Painel integrado ao site, liberado pelo login comum de demonstração.

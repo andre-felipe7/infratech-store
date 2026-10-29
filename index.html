@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfraTech Store</title>
-  <link rel="stylesheet" href="style.css?v=admin-integrado-2">
-  <link rel="stylesheet" href="admin.css?v=admin-integrado-2">
+  <link rel="stylesheet" href="style.css?v=cadastro-email-1">
+  <link rel="stylesheet" href="admin.css?v=cadastro-email-1">
 </head>
 <body>
   <!-- Os links do menu usam href com o id de cada seção. -->
@@ -166,10 +166,10 @@
     <!-- Formulários simples de entrada e cadastro. -->
     <section id="login" class="tela escondido formulario">
       <h2>Entrar na conta</h2>
-      <p>Informe seu usuário e sua senha de demonstração.</p>
+      <p>Informe seu e-mail e sua senha de demonstração. Contas antigas também podem usar o nome de usuário.</p>
       <form onsubmit="entrar(); return false;">
-        <label for="loginUsuario">Usuário</label>
-        <input id="loginUsuario" placeholder="Digite seu usuário" autocomplete="username" required>
+        <label for="loginUsuario">E-mail ou usuário</label>
+        <input id="loginUsuario" placeholder="Digite seu e-mail ou usuário" autocomplete="username" required>
         <label for="loginSenha">Senha</label>
         <input id="loginSenha" type="password" placeholder="Digite sua senha" autocomplete="current-password" required>
         <p id="mensagemLogin" role="status"></p>
@@ -185,6 +185,8 @@
       <form onsubmit="cadastrar(); return false;">
         <label for="novoUsuario">Usuário</label>
         <input id="novoUsuario" placeholder="Escolha um usuário" autocomplete="username" required>
+        <label for="novoEmail">E-mail</label>
+        <input id="novoEmail" type="email" placeholder="seunome@exemplo.com" autocomplete="email" maxlength="150" required>
         <label for="novaSenha">Senha de demonstração</label>
         <input id="novaSenha" type="password" placeholder="Pelo menos 4 caracteres" autocomplete="new-password" minlength="4" required>
         <button type="submit">Cadastrar</button>
@@ -280,11 +282,11 @@
 
     <section id="usuariosAdmin" class="secao">
       <h2>Usuários cadastrados</h2>
-      <p>Consulte os nomes e as datas de cadastro. As senhas não são exibidas.</p>
+      <p>Consulte os nomes, e-mails e as datas de cadastro. As senhas não são exibidas.</p>
       <div class="tabela-container">
         <table>
           <caption>Cadastros da loja</caption>
-          <thead><tr><th scope="col">Usuário</th><th scope="col">Data de cadastro</th></tr></thead>
+          <thead><tr><th scope="col">Usuário</th><th scope="col">E-mail</th><th scope="col">Data de cadastro</th></tr></thead>
           <tbody id="listaUsuarios"></tbody>
         </table>
       </div>
@@ -387,7 +389,7 @@
     <p>Loja de demonstração — sem vendas reais.</p>
     <a href="#inicio" onclick="limparPesquisa()">Voltar ao início ↑</a>
   </footer>
-  <script src="dados.js?v=admin-integrado-2"></script>
-  <script src="script.js?v=admin-integrado-2"></script>
+  <script src="dados.js?v=cadastro-email-1"></script>
+  <script src="script.js?v=cadastro-email-1"></script>
 </body>
 </html>

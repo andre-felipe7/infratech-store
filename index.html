@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfraTech Store</title>
-  <link rel="stylesheet" href="style.css?v=cadastro-email-1">
-  <link rel="stylesheet" href="admin.css?v=cadastro-email-1">
+  <link rel="stylesheet" href="style.css?v=pagamento-cartao-1">
+  <link rel="stylesheet" href="admin.css?v=pagamento-cartao-1">
 </head>
 <body>
   <!-- Os links do menu usam href com o id de cada seção. -->
@@ -224,6 +224,20 @@
           <option value="Boleto">Boleto</option>
         </select>
 
+        <fieldset id="dadosCartao" class="escondido" disabled>
+          <legend>Dados do cartão de demonstração</legend>
+          <p class="aviso">Use dados fictícios. Exemplo: 4111 1111 1111 1111, validade futura e CVV 123. A validação confere o formato, sem consultar banco ou cobrar valores.</p>
+          <label for="nomeCartao">Nome do titular</label>
+          <input id="nomeCartao" autocomplete="off" maxlength="100" required>
+          <label for="numeroCartao">Número do cartão</label>
+          <input id="numeroCartao" inputmode="numeric" autocomplete="off" placeholder="4111 1111 1111 1111" maxlength="23" required>
+          <label for="validadeCartao">Validade (MM/AAAA)</label>
+          <input id="validadeCartao" inputmode="numeric" autocomplete="off" placeholder="12/2030" maxlength="7" required>
+          <label for="cvvCartao">Código de segurança (CVV)</label>
+          <input id="cvvCartao" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required>
+          <p id="erroCartao" role="alert"></p>
+        </fieldset>
+
         <div id="opcoesParcelamento" class="escondido">
           <label for="parcelas">Quantidade de parcelas</label>
           <select id="parcelas" onchange="mostrarPagamento()" required disabled>
@@ -247,7 +261,8 @@
     </section>
 
     <section id="sucesso" class="tela escondido formulario">
-      <h2>Pedido realizado!</h2>
+      <h2 tabindex="-1" id="tituloAgradecimento">Obrigado pela sua compra!</h2>
+      <p>Seu pedido de demonstração foi concluído. A InfraTech Store agradece sua preferência!</p>
       <p id="detalhesPedido"></p>
       <p>Esta é uma compra de demonstração. Nenhum pagamento foi cobrado.</p>
       <button onclick="abrir('loja')">Voltar à loja</button>
@@ -389,7 +404,7 @@
     <p>Loja de demonstração — sem vendas reais.</p>
     <a href="#inicio" onclick="limparPesquisa()">Voltar ao início ↑</a>
   </footer>
-  <script src="dados.js?v=cadastro-email-1"></script>
-  <script src="script.js?v=cadastro-email-1"></script>
+  <script src="dados.js?v=pagamento-cartao-1"></script>
+  <script src="script.js?v=pagamento-cartao-1"></script>
 </body>
 </html>

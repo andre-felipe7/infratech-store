@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfraTech Store</title>
-  <link rel="stylesheet" href="style.css?v=checkout-login-endereco-1">
-  <link rel="stylesheet" href="admin.css?v=checkout-login-endereco-1">
+  <link rel="stylesheet" href="style.css?v=endereco-senha-forte-1">
+  <link rel="stylesheet" href="admin.css?v=endereco-senha-forte-1">
 </head>
 <body>
   <!-- Os links do menu usam href com o id de cada seção. -->
@@ -188,7 +188,8 @@
         <label for="novoEmail">E-mail</label>
         <input id="novoEmail" type="email" placeholder="seunome@exemplo.com" autocomplete="email" maxlength="150" required>
         <label for="novaSenha">Senha de demonstração</label>
-        <input id="novaSenha" type="password" placeholder="Pelo menos 4 caracteres" autocomplete="new-password" minlength="4" required>
+        <input id="novaSenha" type="password" placeholder="Crie uma senha com pelo menos 8 caracteres" autocomplete="new-password" minlength="8" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9\s])\S{8,}" title="Use pelo menos 8 caracteres, incluindo maiúscula, minúscula, número e símbolo, sem espaços." aria-describedby="regrasSenha" required>
+        <p id="regrasSenha" class="aviso">A senha deve ter pelo menos 8 caracteres, com letra maiúscula, letra minúscula, número e símbolo (como !, @ ou #). Não use sua senha real nesta demonstração.</p>
 <fieldset>
           <legend>Endereço de entrega</legend>
           <label for="cadastroEnderecoCep">CEP</label>
@@ -254,6 +255,7 @@
         <label for="enderecoEntrega">Escolha o endereço de entrega</label>
         <select id="enderecoEntrega" onchange="selecionarEnderecoEntrega()"></select>
         <p id="resumoEnderecoEntrega" role="status"></p>
+        <button type="button" onclick="abrirFormularioEndereco()">Cadastrar novo endereço</button>
         <form id="formEnderecoEntrega" onsubmit="salvarEnderecoEntrega(); return false;">
           <h3>Cadastrar novo endereço</h3>
           <fieldset>
@@ -466,7 +468,7 @@
     <p>Loja de demonstração — sem vendas reais.</p>
     <a href="#inicio" onclick="limparPesquisa()">Voltar ao início ↑</a>
   </footer>
-  <script src="dados.js?v=checkout-login-endereco-1"></script>
-  <script src="script.js?v=checkout-login-endereco-1"></script>
+  <script src="dados.js?v=endereco-senha-forte-1"></script>
+  <script src="script.js?v=endereco-senha-forte-1"></script>
 </body>
 </html>

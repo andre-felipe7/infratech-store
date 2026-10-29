@@ -281,6 +281,11 @@ function salvarEnderecoEntrega() {
 }
 
 function cadastrar() {
+  if (!document.getElementById("aceiteTermos").checked) {
+    alert("Leia e aceite os Termos de Uso e o Aviso de Privacidade para criar a conta.");
+    document.getElementById("aceiteTermos").focus();
+    return;
+  }
   var usuario = document.getElementById("novoUsuario").value.trim();
   var email = document.getElementById("novoEmail").value.trim().toLowerCase();
   var senha = document.getElementById("novaSenha").value;
@@ -313,11 +318,12 @@ function cadastrar() {
       return;
     }
   }
-  contas.push({ usuario: usuario, email: email, senha: senha, enderecos: [endereco], cadastradoEm: new Date().toISOString() });
+  contas.push({ usuario: usuario, email: email, senha: senha, enderecos: [endereco], aceitePrivacidade: { aceito: true, versao: "2026-10-28", aceitoEm: new Date().toISOString() }, cadastradoEm: new Date().toISOString() });
   if (!salvarDados("contas", contas)) return;
   alert("Cadastro realizado! Agora entre com sua conta.");
   document.getElementById("loginUsuario").value = email;
   document.getElementById("novaSenha").value = "";
+  document.getElementById("aceiteTermos").checked = false;
   abrir("login");
 }
 

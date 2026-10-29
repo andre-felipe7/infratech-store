@@ -85,7 +85,7 @@ function abrir(nome) {
   }
   document.getElementById(nome).classList.remove("escondido");
   if (nome === "carrinho") mostrarCarrinho();
-  if (nome === "pagamento") mostrarPagamento();
+  if (nome === "pagamento") { atualizarEnderecosEntrega(); mostrarPagamento(); }
   if (nome === "loja") mostrarProdutos();
   if (nome === "admin") atualizarPainel();
 }
@@ -197,6 +197,89 @@ function emailValido(email) {
 }
 
 // Cadastro de demonstração: salva usuário, e-mail e senha somente neste navegador.
+// Endereços são vinculados à conta local de demonstração.
+function lerEnderecoFormulario(prefixo) {
+  var endereco = {};
+  ["Cep", "Rua", "Numero", "Complemento", "Bairro", "Cidade", "Uf"].forEach(function (campo) {
+    endereco[campo] = document.getElementById(prefixo + campo).value.trim();
+  });
+  endereco.Uf = endereco.Uf.toUpperCase();
+  if (!/^\d{5}-?\d{3}$/.test(endereco.Cep) || !endereco.Rua ||
+      !endereco.Numero || !endereco.Bairro || !endereco.Cidade ||
+      !/^(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)$/.test(endereco.Uf)) return null;
+  if (endereco.Rua.length > 150 || endereco.Numero.length > 20 ||
+      endereco.Complemento.length > 100 || endereco.Bairro.length > 100 || endereco.Cidade.length > 100) return null;
+  endereco.Cep = endereco.Cep.replace(/^(\d{5})-?(\d{3})$/, "$1-$2");
+  return endereco;
+}
+
+function enderecosDaConta() {
+  if (!usuarioLogado) return [];
+  if (adminAutenticado && usuarioLogado === "admin") return lerDados("infratechEnderecosAdmin", []);
+  var contas = lerDados("contas", []);
+  for (var i = 0; i < contas.length; i++) {
+    if (contas[i].usuario === usuarioLogado) return contas[i].enderecos || [];
+  }
+  return [];
+}
+
+function textoEndereco(endereco) {
+  return endereco.Rua + ", " + endereco.Numero +
+    (endereco.Complemento ? " — " + endereco.Complemento : "") +
+    " — " + endereco.Bairro + ", " + endereco.Cidade + "/" + endereco.Uf + " — CEP " + endereco.Cep;
+}
+
+function atualizarEnderecosEntrega(indice) {
+  var seletor = document.getElementById("enderecoEntrega");
+  var anterior = indice === undefined ? seletor.value : String(indice);
+  var enderecos = enderecosDaConta();
+  seletor.innerHTML = "";
+  var vazio = document.createElement("option");
+  vazio.value = ""; vazio.textContent = enderecos.length ? "Selecione um endereço" : "Cadastre um endereço abaixo";
+  seletor.appendChild(vazio);
+  enderecos.forEach(function (endereco, i) {
+    var opcao = document.createElement("option");
+    opcao.value = String(i); opcao.textContent = textoEndereco(endereco);
+    seletor.appendChild(opcao);
+  });
+  seletor.value = anterior !== "" && enderecos[Number(anterior)] ? anterior : (enderecos.length ? "0" : "");
+  selecionarEnderecoEntrega();
+}
+
+function enderecoEntregaSelecionado() {
+  var valor = document.getElementById("enderecoEntrega").value;
+  if (!/^\d+$/.test(valor)) return null;
+  return enderecosDaConta()[Number(valor)] || null;
+}
+
+function selecionarEnderecoEntrega() {
+  var endereco = enderecoEntregaSelecionado();
+  document.getElementById("resumoEnderecoEntrega").textContent =
+    endereco ? "Entrega em: " + textoEndereco(endereco) : "Salve um endereço para continuar.";
+}
+
+function salvarEnderecoEntrega() {
+  var mensagem = document.getElementById("mensagemEnderecoEntrega");
+  if (!usuarioLogado) { mensagem.textContent = "Entre na sua conta para salvar o endereço."; return; }
+  var endereco = lerEnderecoFormulario("entregaEndereco");
+  if (!endereco) { mensagem.textContent = "Preencha o endereço completo, com CEP válido e a sigla do estado."; return; }
+  var enderecos = enderecosDaConta();
+  var indice = enderecos.findIndex(function (item) { return textoEndereco(item).toLowerCase() === textoEndereco(endereco).toLowerCase(); });
+  if (indice === -1) { indice = enderecos.length; enderecos.push(endereco); }
+  if (adminAutenticado && usuarioLogado === "admin") {
+    if (!salvarDados("infratechEnderecosAdmin", enderecos)) return;
+  } else {
+    var contas = lerDados("contas", []);
+    var conta = contas.find(function (item) { return item.usuario === usuarioLogado; });
+    if (!conta) { mensagem.textContent = "Conta não encontrada. Entre novamente."; return; }
+    conta.enderecos = enderecos;
+    if (!salvarDados("contas", contas)) return;
+  }
+  atualizarEnderecosEntrega(indice);
+  document.getElementById("formEnderecoEntrega").reset();
+  mensagem.textContent = "Endereço salvo e selecionado para esta entrega.";
+}
+
 function cadastrar() {
   var usuario = document.getElementById("novoUsuario").value.trim();
   var email = document.getElementById("novoEmail").value.trim().toLowerCase();
@@ -217,6 +300,8 @@ function cadastrar() {
     alert("A senha deve ter pelo menos 4 caracteres.");
     return;
   }
+  var endereco = lerEnderecoFormulario("cadastroEndereco");
+  if (!endereco) { alert("Preencha o endereço completo, com CEP válido e a sigla do estado."); return; }
   // Apenas para demonstração: não utilize senhas reais.
   var contas = lerDados("contas", []);
   for (var i = 0; i < contas.length; i++) {
@@ -228,7 +313,7 @@ function cadastrar() {
       return;
     }
   }
-  contas.push({ usuario: usuario, email: email, senha: senha, cadastradoEm: new Date().toISOString() });
+  contas.push({ usuario: usuario, email: email, senha: senha, enderecos: [endereco], cadastradoEm: new Date().toISOString() });
   if (!salvarDados("contas", contas)) return;
   alert("Cadastro realizado! Agora entre com sua conta.");
   document.getElementById("loginUsuario").value = email;
@@ -431,6 +516,9 @@ function irParaPagamento() {
   codigoCupomAplicado = "";
   document.getElementById("cupom").value = "";
   limparDadosCartao();
+  document.getElementById("enderecoEntrega").value = "";
+  document.getElementById("formEnderecoEntrega").reset();
+  document.getElementById("mensagemEnderecoEntrega").textContent = "";
   document.getElementById("formaPagamento").value = "";
   document.getElementById("parcelas").value = "1";
   document.getElementById("mensagemCupom").textContent = "";
@@ -644,6 +732,13 @@ function finalizarCompra() {
     }
   }
 
+  var enderecoEntrega = enderecoEntregaSelecionado();
+  if (!enderecoEntrega) {
+    alert("Selecione ou cadastre um endereço de entrega antes de confirmar.");
+    document.getElementById("enderecoEntrega").focus();
+    return;
+  }
+
   // Usa o mesmo cálculo exibido no resumo para confirmar o pedido.
   var dados = calcularPagamento();
   if (ultimoTotalExibido !== null && dados.total !== ultimoTotalExibido) {
@@ -667,6 +762,7 @@ function finalizarCompra() {
       detalhes += " (sem juros)";
     }
   }
+  detalhes += "\nEndereço de entrega: " + textoEndereco(enderecoEntrega);
   detalhes += "\nTotal: " + dinheiro(dados.total);
   document.getElementById("detalhesPedido").textContent = detalhes;
   carrinho = [];

@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InfraTech Store</title>
-  <link rel="stylesheet" href="style.css?v=pagamento-cartao-1">
-  <link rel="stylesheet" href="admin.css?v=pagamento-cartao-1">
+  <link rel="stylesheet" href="style.css?v=enderecos-entrega-1">
+  <link rel="stylesheet" href="admin.css?v=enderecos-entrega-1">
 </head>
 <body>
   <!-- Os links do menu usam href com o id de cada seção. -->
@@ -189,6 +189,23 @@
         <input id="novoEmail" type="email" placeholder="seunome@exemplo.com" autocomplete="email" maxlength="150" required>
         <label for="novaSenha">Senha de demonstração</label>
         <input id="novaSenha" type="password" placeholder="Pelo menos 4 caracteres" autocomplete="new-password" minlength="4" required>
+<fieldset>
+          <legend>Endereço de entrega</legend>
+          <label for="cadastroEnderecoCep">CEP</label>
+          <input id="cadastroEnderecoCep" placeholder="00000-000" maxlength="9" required inputmode="numeric" pattern="[0-9]{5}-?[0-9]{3}">
+          <label for="cadastroEnderecoRua">Rua / avenida</label>
+          <input id="cadastroEnderecoRua" placeholder="Nome da rua" maxlength="150" required>
+          <label for="cadastroEnderecoNumero">Número</label>
+          <input id="cadastroEnderecoNumero" placeholder="Número ou s/n" maxlength="20" required>
+          <label for="cadastroEnderecoComplemento">Complemento (opcional)</label>
+          <input id="cadastroEnderecoComplemento" placeholder="Apartamento, bloco…" maxlength="100" >
+          <label for="cadastroEnderecoBairro">Bairro</label>
+          <input id="cadastroEnderecoBairro" placeholder="Bairro" maxlength="100" required>
+          <label for="cadastroEnderecoCidade">Cidade</label>
+          <input id="cadastroEnderecoCidade" placeholder="Cidade" maxlength="100" required>
+          <label for="cadastroEnderecoUf">Estado (UF)</label>
+          <input id="cadastroEnderecoUf" placeholder="SP" maxlength="2" required pattern="[A-Za-z]{2}">
+        </fieldset>
         <button type="submit">Cadastrar</button>
       </form>
       <p>Já tem conta? <a href="#" onclick="abrir('login'); return false;">Entrar</a></p>
@@ -215,6 +232,34 @@
       <input id="cupom" placeholder="Exemplo: INFRA10">
       <button class="secundario" onclick="aplicarCupom()">Aplicar cupom</button>
       <p id="mensagemCupom" role="status"></p>
+      <section aria-label="Endereços de entrega">
+        <h3>Onde você quer receber?</h3>
+        <label for="enderecoEntrega">Escolha o endereço de entrega</label>
+        <select id="enderecoEntrega" onchange="selecionarEnderecoEntrega()"></select>
+        <p id="resumoEnderecoEntrega" role="status"></p>
+        <form id="formEnderecoEntrega" onsubmit="salvarEnderecoEntrega(); return false;">
+          <h3>Cadastrar novo endereço</h3>
+          <fieldset>
+          <legend>Endereço de entrega</legend>
+          <label for="entregaEnderecoCep">CEP</label>
+          <input id="entregaEnderecoCep" placeholder="00000-000" maxlength="9" required inputmode="numeric" pattern="[0-9]{5}-?[0-9]{3}">
+          <label for="entregaEnderecoRua">Rua / avenida</label>
+          <input id="entregaEnderecoRua" placeholder="Nome da rua" maxlength="150" required>
+          <label for="entregaEnderecoNumero">Número</label>
+          <input id="entregaEnderecoNumero" placeholder="Número ou s/n" maxlength="20" required>
+          <label for="entregaEnderecoComplemento">Complemento (opcional)</label>
+          <input id="entregaEnderecoComplemento" placeholder="Apartamento, bloco…" maxlength="100" >
+          <label for="entregaEnderecoBairro">Bairro</label>
+          <input id="entregaEnderecoBairro" placeholder="Bairro" maxlength="100" required>
+          <label for="entregaEnderecoCidade">Cidade</label>
+          <input id="entregaEnderecoCidade" placeholder="Cidade" maxlength="100" required>
+          <label for="entregaEnderecoUf">Estado (UF)</label>
+          <input id="entregaEnderecoUf" placeholder="SP" maxlength="2" required pattern="[A-Za-z]{2}">
+        </fieldset>
+          <button type="submit">Salvar e usar este endereço</button>
+          <p id="mensagemEnderecoEntrega" role="status"></p>
+        </form>
+      </section>
       <form onsubmit="finalizarCompra(); return false;">
         <label for="formaPagamento">Forma de pagamento</label>
         <select id="formaPagamento" onchange="mostrarPagamento()" required>
@@ -404,7 +449,7 @@
     <p>Loja de demonstração — sem vendas reais.</p>
     <a href="#inicio" onclick="limparPesquisa()">Voltar ao início ↑</a>
   </footer>
-  <script src="dados.js?v=pagamento-cartao-1"></script>
-  <script src="script.js?v=pagamento-cartao-1"></script>
+  <script src="dados.js?v=enderecos-entrega-1"></script>
+  <script src="script.js?v=enderecos-entrega-1"></script>
 </body>
 </html>

@@ -190,12 +190,23 @@ function mostrarProdutos() {
   }
 }
 
-// Cadastro de demonstração: salva usuário e senha somente neste navegador.
+var emailAdmin = "admin@gmail.com";
+
+function emailValido(email) {
+  return email.length <= 150 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Cadastro de demonstração: salva usuário, e-mail e senha somente neste navegador.
 function cadastrar() {
   var usuario = document.getElementById("novoUsuario").value.trim();
+  var email = document.getElementById("novoEmail").value.trim().toLowerCase();
   var senha = document.getElementById("novaSenha").value;
-  if (usuario.toLowerCase() === "admin") {
-    alert("Esse nome de usuário é reservado. Escolha outro nome.");
+  if (usuario.toLowerCase() === "admin" || usuario.toLowerCase() === emailAdmin || email === emailAdmin) {
+    alert("Esse usuário ou e-mail é reservado ao administrador.");
+    return;
+  }
+  if (!emailValido(email)) {
+    alert("Informe um e-mail válido, como seunome@exemplo.com.");
     return;
   }
   if (usuario === "" || senha === "") {
@@ -209,15 +220,18 @@ function cadastrar() {
   // Apenas para demonstração: não utilize senhas reais.
   var contas = lerDados("contas", []);
   for (var i = 0; i < contas.length; i++) {
-    if (contas[i].usuario === usuario) {
-      alert("Este usuário já existe.");
+    if (contas[i].usuario.toLowerCase() === usuario.toLowerCase() ||
+        (contas[i].email || "").toLowerCase() === email ||
+        contas[i].usuario.toLowerCase() === email ||
+        (contas[i].email || "").toLowerCase() === usuario.toLowerCase()) {
+      alert("Este usuário ou e-mail já está cadastrado.");
       return;
     }
   }
-  contas.push({ usuario: usuario, senha: senha, cadastradoEm: new Date().toISOString() });
+  contas.push({ usuario: usuario, email: email, senha: senha, cadastradoEm: new Date().toISOString() });
   if (!salvarDados("contas", contas)) return;
   alert("Cadastro realizado! Agora entre com sua conta.");
-  document.getElementById("loginUsuario").value = usuario;
+  document.getElementById("loginUsuario").value = email;
   document.getElementById("novaSenha").value = "";
   abrir("login");
 }
@@ -229,9 +243,9 @@ function entrar() {
   var mensagem = document.getElementById("mensagemLogin");
   mensagem.textContent = "";
 
-  if (usuario.toLowerCase() === "admin") {
+  if (usuario.toLowerCase() === emailAdmin) {
     if (senha !== "4747") {
-      mensagem.textContent = "Usuário ou senha incorretos.";
+      mensagem.textContent = "E-mail, usuário ou senha incorretos.";
       return;
     }
     usuarioLogado = "admin";
@@ -246,18 +260,19 @@ function entrar() {
 
   var contas = lerDados("contas", []);
   for (var i = 0; i < contas.length; i++) {
-    if (contas[i].usuario === usuario && contas[i].senha === senha) {
+    if (((contas[i].email || "").toLowerCase() === usuario.toLowerCase() ||
+         contas[i].usuario.toLowerCase() === usuario.toLowerCase()) && contas[i].senha === senha) {
       adminAutenticado = false;
       sessionStorage.removeItem("infratechAdminLogado");
-      usuarioLogado = usuario;
-      localStorage.setItem("usuarioLogado", usuario);
+      usuarioLogado = contas[i].usuario;
+      localStorage.setItem("usuarioLogado", usuarioLogado);
       document.getElementById("loginSenha").value = "";
       atualizarConta();
       abrir("loja");
       return;
     }
   }
-  mensagem.textContent = "Usuário ou senha incorretos.";
+  mensagem.textContent = "E-mail, usuário ou senha incorretos.";
 }
 
 function verificarAcessoAdmin() {
@@ -684,9 +699,10 @@ function mostrarUsuariosAdmin() {
   area.innerHTML = "";
   for (var i = 0; i < contas.length; i++) {
     area.innerHTML += '<tr><td>' + escaparHTML(contas[i].usuario) + '</td><td>' +
+      escaparHTML(contas[i].email || 'Não informado') + '</td><td>' +
       escaparHTML(formatarData(contas[i].cadastradoEm)) + '</td></tr>';
   }
-  if (contas.length === 0) area.innerHTML = '<tr><td colspan="2">Nenhum usuário cadastrado.</td></tr>';
+  if (contas.length === 0) area.innerHTML = '<tr><td colspan="3">Nenhum usuário cadastrado.</td></tr>';
 }
 
 function mostrarProdutosAdmin() {

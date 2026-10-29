@@ -86,6 +86,7 @@ function abrir(nome) {
   document.getElementById(nome).classList.remove("escondido");
   if (nome === "carrinho") mostrarCarrinho();
   if (nome === "pagamento") { atualizarEnderecosEntrega(); mostrarPagamento(); }
+  window.scrollTo(0, 0);
   if (nome === "loja") mostrarProdutos();
   if (nome === "admin") atualizarPainel();
 }
@@ -280,6 +281,16 @@ function salvarEnderecoEntrega() {
   mensagem.textContent = "Endereço salvo e selecionado para esta entrega.";
 }
 
+function senhaCadastroValida(senha) {
+  return senha.length >= 8 && /[A-Z]/.test(senha) && /[a-z]/.test(senha) &&
+    /[0-9]/.test(senha) && /[^A-Za-z0-9\s]/.test(senha) && !/\s/.test(senha);
+}
+
+function abrirFormularioEndereco() {
+  document.getElementById("formEnderecoEntrega").scrollIntoView({ behavior: "smooth", block: "start" });
+  document.getElementById("entregaEnderecoCep").focus({ preventScroll: true });
+}
+
 function cadastrar() {
   if (!document.getElementById("aceiteTermos").checked) {
     alert("Leia e aceite os Termos de Uso e o Aviso de Privacidade para criar a conta.");
@@ -301,8 +312,8 @@ function cadastrar() {
     alert("Preencha usuário e senha.");
     return;
   }
-  if (senha.length < 4) {
-    alert("A senha deve ter pelo menos 4 caracteres.");
+  if (!senhaCadastroValida(senha)) {
+    alert("A senha deve ter pelo menos 8 caracteres, com letra maiúscula, minúscula, número e símbolo, sem espaços.");
     return;
   }
   var endereco = lerEnderecoFormulario("cadastroEndereco");

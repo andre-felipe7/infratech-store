@@ -242,7 +242,7 @@ function atualizarEnderecosEntrega(indice) {
     opcao.value = String(i); opcao.textContent = textoEndereco(endereco);
     seletor.appendChild(opcao);
   });
-  seletor.value = anterior !== "" && enderecos[Number(anterior)] ? anterior : (enderecos.length ? "0" : "");
+  seletor.value = anterior !== "" && enderecos[Number(anterior)] ? anterior : "";
   selecionarEnderecoEntrega();
 }
 
@@ -334,7 +334,7 @@ function entrar() {
   var mensagem = document.getElementById("mensagemLogin");
   mensagem.textContent = "";
 
-  if (usuario.toLowerCase() === emailAdmin) {
+  if (usuario.toLowerCase() === "admin" || usuario.toLowerCase() === emailAdmin) {
     if (senha !== "4747") {
       mensagem.textContent = "E-mail, usuário ou senha incorretos.";
       return;
@@ -503,6 +503,17 @@ function mostrarCarrinho() {
   document.getElementById("subtotal").textContent = "Subtotal: " + dinheiro(calcularSubtotal());
 }
 
+function contaAutenticadaParaCompra() {
+  usuarioLogado = localStorage.getItem("usuarioLogado") || "";
+  if (usuarioLogado === "admin") {
+    adminAutenticado = sessionStorage.getItem("infratechAdminLogado") === "true";
+    return adminAutenticado;
+  }
+  return usuarioLogado !== "" && lerDados("contas", []).some(function (conta) {
+    return conta.usuario === usuarioLogado;
+  });
+}
+
 function irParaPagamento() {
   carregarCatalogo();
   if (atualizarCarrinhoDisponivel()) {
@@ -513,7 +524,7 @@ function irParaPagamento() {
     alert("Adicione produtos ao carrinho.");
     return;
   }
-  if (usuarioLogado === "") {
+  if (!contaAutenticadaParaCompra()) {
     alert("Entre na sua conta para finalizar a compra.");
     abrir("login");
     return;
@@ -718,9 +729,14 @@ function finalizarCompra() {
     abrir("carrinho");
     return;
   }
-  if (usuarioLogado === "" || carrinho.length === 0) {
-    alert("Entre na sua conta e adicione produtos.");
-    abrir("loja");
+  if (!contaAutenticadaParaCompra()) {
+    alert("Entre na sua conta para finalizar a compra.");
+    abrir("login");
+    return;
+  }
+  if (carrinho.length === 0) {
+    alert("Adicione produtos ao carrinho.");
+    abrir("carrinho");
     return;
   }
   var forma = document.getElementById("formaPagamento").value;
